@@ -1,19 +1,66 @@
 ---
 driver:
   name: vagrant
-
+  network:
+    - ["public_network"]  # This creates second interface allowing the VMs to reach each other
+  customize:
+    memory:  512  # This gives each VM to 512 MB for memory
 provisioner:
   name: chef_zero
   product_name: chef
   product_version: 14.12.9
+# The verifier specifies which application will be used when running the automated tests.
 verifier:
   name: inspec
-
+# Platforms names the target operating systems. We are targeting only  CentOS 7.
 platforms:
   - name: centos-7
-
 suites:
-  - name: default
+  - name: test1
+    driver:
+      vm_hostname: test1.CG2-TP.SparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+  - name: test2
+    driver:
+      vm_hostname: test2.CG2-TPSparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+- name: test3
+    driver:
+      vm_hostname: test3.CG2-TP.SparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+  - name: test4
+    driver:
+      vm_hostname: test4.CG2-TPSparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+  - name: test5
+    driver:
+      vm_hostname: test5.CG2-TP.SparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+  - name: test6
+    driver:
+      vm_hostname: test6.CG2-TPSparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+- name: test7
+    driver:
+      vm_hostname: test7.CG2-TP.SparkIT-Games.com
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    attributes:
+  - name: test8
+    driver:
+      vm_hostname: test8.CG2-TPSparkIT-Games.com
     run_list:
       - recipe[learn_chef_httpd::default]
     attributes:
